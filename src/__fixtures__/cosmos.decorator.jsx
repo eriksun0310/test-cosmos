@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
 
@@ -17,22 +18,32 @@ import "@mantine/tiptap/styles.css";
 // import '@/index.css';
 import { Provider } from "react-redux";
 import { store } from "../store/store";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 export default ({ children }) => {
   return (
     <Provider store={store}>
-      <MantineProvider defaultColorScheme="dark">
-        <ModalsProvider>
-          <Notifications position="top-right" />
+      <ThemeProvider theme={darkTheme}>
+        <MantineProvider defaultColorScheme="dark">
+          <ModalsProvider>
+            <Notifications position="top-right" />
 
-          <div
-            className="w-full h-screen form-editor-canvas flex justify-center items-center p-10"
-            id="modalWindow"
-          >
-            <Paper className="p-5 w-1/2 resize overflow-auto">{children}</Paper>
-          </div>
-        </ModalsProvider>
-      </MantineProvider>
+            <div
+              className="w-full h-screen form-editor-canvas flex justify-center items-center p-10"
+              id="modalWindow"
+            >
+              <Paper className="p-5 w-1/2 resize overflow-auto">
+                {children}
+              </Paper>
+            </div>
+          </ModalsProvider>
+        </MantineProvider>
+      </ThemeProvider>
     </Provider>
   );
 };
